@@ -1,13 +1,24 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Inventory {
-    HashMap<String,Product> productMap = new HashMap<>();
-    ArrayList<Product> inv = new ArrayList<>();
+
+    Map<String,Product> productMap = new HashMap<>();
+    List<Product> inv = new ArrayList<>();
 
     public void addProduct(Product product){
         inv.add(product);
         productMap.put(product.name.toLowerCase(), product);
+    }
+
+    public void addProducts(List<Product> productList){
+        inv=productList;
+        productMap.clear();
+        for(Product product : productList){
+            productMap.put(product.name.toLowerCase(), product);
+        }
     }
 
     public void removeProduct(String name){
