@@ -1,23 +1,20 @@
 import java.util.HashMap;
 import java.util.Scanner;
 public class Cart {
-    HashMap<String, Integer> cart = new HashMap<>();
-    Scanner scanner = new Scanner(System.in);
+    public HashMap<String, Integer> cart = new HashMap<>();
     String item;
     int quan;
-    public void addItem(String name, int quantity, Inventory inventory) {
-        if (inventory.productMap.containsKey(name.toLowerCase())){
-            if (cart.containsKey(name.toLowerCase())){
-                item = scanner.next();
-                System.out.println("How many " + item + " 's do you want");
-                quan = scanner.nextInt();
-            }
-                else{
-                System.out.println("Product not found.");
-                }
-            }
+    public void addItem( Inventory inventory) {
+        System.out.println("write the product you need to add. ");
+        item = Utils.getItemInput(); // get item name from the user
+        if (inventory.productMap.containsKey(item)){
+            System.out.println("How many " + item + " 's do you want");
+            quan = Utils.getNumberInput();
+            cart.put(item,quan);
+        } else{
+            System.out.println("Product not found.");
         }
-
+    }
 
     public Cart() {
     }

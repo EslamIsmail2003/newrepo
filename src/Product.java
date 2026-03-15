@@ -3,12 +3,14 @@ public class Product {
     String name;
     double price;
     int quantity;
+    int id;
+    // TODO use log instead of println
 
-
-    public Product(String name, double price, int quantity){
+    public Product(String name, double price, int quantity,int id){
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.id=id;
     }
 
     public void printProductsInfo(){
