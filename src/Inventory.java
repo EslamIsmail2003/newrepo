@@ -4,20 +4,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Inventory {
-
-    Map<String,Product> productMap = new HashMap<>();
-    List<Product> inv = new ArrayList<>();
+    // Making map and list private
+    private final Map<String,Product> productMap = new HashMap<>();
+    private List<Product> inv = new ArrayList<>();
+    // adding getProduct method
+    public Product getProduct(String name){
+    return productMap.get(name.toLowerCase());
+    }
 
     public void addProduct(Product product){
         inv.add(product);
-        productMap.put(product.name.toLowerCase(), product);
+        productMap.put(product.getName().toLowerCase(), product);
     }
 
     public void addProducts(List<Product> productList){
         inv=productList;
         productMap.clear();
         for(Product product : productList){
-            productMap.put(product.name.toLowerCase(), product);
+            productMap.put(product.getName().toLowerCase(), product);
         }
     }
 
@@ -33,12 +37,12 @@ public class Inventory {
     public void totalInventoryValue(){
         double total = 0;
         for (Product product : inv){
-            total += product.price * product.quantity;
+            total += product.getPrice() * product.getQuantity();
         }
         System.out.println("Total Inventory Value : " + total);
     }
 
     public void findProduct(String name){
-        productMap.get(name);
+        productMap.get(name.toLowerCase());
     }
 }

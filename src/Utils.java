@@ -11,4 +11,8 @@ public class Utils {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+    public static long getLongInput(){
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLong();
+    }
 }
