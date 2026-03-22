@@ -39,31 +39,53 @@ public class Main {
             if (choice == 1) {
                 controlInv.printAllProducts();
             }
-            else if (choice == 2) {
-                System.out.println("Please enter the product name: ");
-                item = Utils.getItemInput();
-                Product found = controlInv.getProduct(item); //fixed find item method
-                if (found != null) {
-                    found.printProductsInfo();
-                } else {
-                    System.out.println("Sorry we don't have this product");
+             else if (choice==2) {
+                while (true) {
+                    String input;
+                    cart.addItem(controlInv);
+                    System.out.println("Would you like to order anything else ? (Yes/No): ");
+                    input = Utils.getItemInput();
+                    if (input.equals("yes")) {
+                        continue;
+                    }
+                    else if (input.equals("no")){
+                        System.out.println("Added items to cart! ");
+                    }
+                    break;
                 }
             }
-             else if (choice==3){
-                cart.addItem(controlInv);
+            else if (choice == 3) {
+                while (true) {
+                    String input;
+                    String input2;
+                    printCart(cart, controlInv);
+                    System.out.println("..........");
+                    System.out.println("Would you like to remove any items from the cart? (Yes/No): ");
+                    input = Utils.getItemInput();
+                    if (input.equalsIgnoreCase("yes")) {
+                        System.out.println("Which product would you like to remove: ");
+                        input2 = Utils.getItemInput();
+                        System.out.println("How many would you like to remove? (enter 0 to remove all): ");
+                        int quan = Utils.getNumberInput();
+                        if (quan == 0) {
+                            cart.removeItem(input2);
+                        } else {
+                            cart.removeQuantity(input2, quan);
+                        }
+                    } else if (input.equalsIgnoreCase("no")) {
+                        break;
+                    }
+                }
             }
-            else if (choice ==4) {
-                printCart(cart, controlInv);
-            }
-            else if (choice==5){
+            else if (choice==4){
                 Payment payment = new Payment(cart, controlInv);
                 payment.showOrderSummary();
             }
-            else if (choice == 6){
+            else if (choice == 5){
                 Payment payment = new Payment(cart, controlInv);
-                payment.confirmOrder();
+                payment.paymentMethod();
             }
-            else if(choice == 7){
+            else if(choice == 6){
                 System.out.println("Thanks for using our shop! ");
                 break;
             }
@@ -77,18 +99,22 @@ public class Main {
             int quantity = entry.getValue();
             Product product = inventory.getProduct(productName);
             double price = product.getPrice();
-            System.out.println("Product name : " + productName + " , Product price : " + String.format("%.2f", price) + " , Quantity : " + quantity);
+            System.out.println("Product name : " + Character.toUpperCase(productName.charAt(0)) + productName.substring(1)+ " , Price each : " + String.format("%.2f", price) + " , Quantity ordered : " + quantity);
         }
     }
     private static void printOptions(){
         System.out.println("1. View all products.");
-        System.out.println("2. Find a product.");
-        System.out.println("3. browse products.");
-        System.out.println("4. View cart.");
-        System.out.println("5. Order summary.");
-        System.out.println("6. Confirm order. ");
-        System.out.println("7. Exit");
+        System.out.println("2. Add items to cart.");
+        System.out.println("3. View cart.");
+        System.out.println("4. Order summary.");
+        System.out.println("5. Confirm order. ");
+        System.out.println("6. Exit");
     }
 }
+
+
+// adding items method should always loop until user decided to move to check out. // done
+//  System.out.println("4. Remove items from the cart. ");  >>> add remove items from cart if user doesn't want it // done
+//Add COD or Card payment to options/ done
 
 

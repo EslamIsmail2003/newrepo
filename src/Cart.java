@@ -10,9 +10,31 @@ public class Cart {
         if (inventory.getProduct(item) != null){
             System.out.println("How many " + item + " 's do you want");
             quan = Utils.getNumberInput();
-            cart.put(item,quan);
+            cart.put(item.toLowerCase(),quan);
         } else{
-            System.out.println("Product not found.");
+            System.out.println("Sorry, We don't have this product. ");
+        }
+    }
+    public void removeItem(String name) {
+        String key = name.toLowerCase();
+        if (cart.containsKey(key)) {
+            cart.remove(key);
+        } else {
+            System.out.println("Product not found in cart.");
+        }
+    }
+    public void removeQuantity(String name, int quan){
+        String key = name.toLowerCase();
+        if (cart.containsKey(key)){
+            int currentQuantity = cart.get(key);
+            if (quan>= currentQuantity){
+                cart.remove(key);
+                System.out.println("Items removed from the cart! ");
+            }
+            else {
+                cart.put(key,currentQuantity- quan);
+                System.out.println("Quantity updated successfully! ");
+            }
         }
     }
     public HashMap<String, Integer> getCart(){
